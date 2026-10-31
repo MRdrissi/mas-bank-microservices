@@ -21,21 +21,58 @@ public class CustomerServiceApplication {
     @Bean
     CommandLineRunner commandLineRunner(CustomerRepository customerRepository) {
         return args -> {
-
             customerRepository.save(
                     Customer.builder()
                             .firstName("Marwane")
                             .lastName("Drissi")
                             .email("marwane@drissi.test")
                             .build());
+
             customerRepository.save(
                     Customer.builder()
-                            .firstName("Chaimaa")
-                            .lastName("Hattab")
-                            .email("chaimaa@drissi.test")
+                            .firstName("Yassmine")
+                            .lastName("aloui")
+                            .email("yassminr@aloui.test")
                             .build());
-        };
 
+            customerRepository.save(
+                    Customer.builder()
+                            .firstName("Ilham")
+                            .lastName("Amine")
+                            .email("ilham@amine.ma")
+                            .build());
+
+
+            String[] firstNames = {
+                    "Youssef", "Sara", "Mohamed", "Fatima",
+                    "Omar", "Salma", "Hamza", "Imane",
+                    "Ayoub", "Hajar", "Anas", "Nour",
+                    "Mehdi", "Kawtar", "Amine"
+            };
+
+            String[] lastNames = {
+                    "Benali", "El Mansouri", "Alaoui",
+                    "Bennani", "Idrissi", "Tazi",
+                    "Berrada", "Fassi", "Amrani",
+                    "Chraibi", "Lahlou"
+            };
+
+            for (int i = 4; i <= 50; i++) {
+
+                String firstName = firstNames[(i - 4) % firstNames.length];
+                String lastName = lastNames[(i - 4) % lastNames.length];
+
+                Customer customer = Customer.builder()
+                        .firstName(firstName)
+                        .lastName(lastName)
+                        .email("client" + i + "@masbank.test")
+                        .build();
+
+                customerRepository.save(customer);
+            }
+
+            System.out.println("50 clients initialisés avec succès !");
+        };
     }
 
 }
